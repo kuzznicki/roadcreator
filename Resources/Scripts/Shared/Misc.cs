@@ -223,6 +223,7 @@ public static class Misc
                 Handles.DrawLine(guidelines.startPoint - left * 0.5f, guidelines.startPoint + left * 0.5f);
                 Handles.DrawLine(guidelines.endPoint - left * 0.5f, guidelines.endPoint + left * 0.5f);
             }
+            
         }
     }
 
@@ -236,6 +237,7 @@ public static class Misc
     {
         List<MeshFilter> meshFilters = new List<MeshFilter>(gameObject.GetComponentsInChildren<MeshFilter>());
         List<Material> materials = new List<Material>();
+        List<string> materialNames = new List<string>();
         MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
 
         // Support objects with more materials than meshes
@@ -261,9 +263,11 @@ public static class Misc
 
             foreach (Material localMaterial in localMaterials)
             {
-                if (!materials.Contains(localMaterial))
+                // if (!materials.Contains(localMaterial))
+                if (!materialNames.Contains(localMaterial.ToString()))
                 {
                     materials.Add(localMaterial);
+                    materialNames.Add(localMaterial.ToString());
                 }
             }
         }
@@ -279,7 +283,8 @@ public static class Misc
 
                 for (int materialIndex = 0; materialIndex < localMaterials.Length; materialIndex++)
                 {
-                    if (localMaterials[materialIndex] != material)
+                    // if (localMaterials[materialIndex] != material)
+                    if (localMaterials[materialIndex].ToString() != material.ToString())
                     {
                         continue;
                     }
